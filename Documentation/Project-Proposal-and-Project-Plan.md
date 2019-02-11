@@ -44,9 +44,9 @@ Scope of our project is to reduce redundancy in version control and help users t
 1. Github:
 Github is a DVCS(Distributed version control system) used for tracking changes to the files and allows multiple developers to work simultaneously.
 2. ModelHub: Deep learning Life Cycle Management
-In order to deal with rich set of artifacts, Modelhub adopts a modeling version control system, a domain specific language for seeking through model space and hosted service.
-3. Towards Unified Data and Life Cycle Management for deep learning.
-This paper mainly concentrates on implementation of data and life cycle management system for deep learning. Firstly, proposes a high-level domain specific language to speed up the modeling process. Thereafter, a novel model versioning system and parameter archival storage system(PAS) are developed which reduces storage footprint.
+In order to deal with rich set of artifacts, Modelhub adopts a modeling version control system, for seeking through hosted service and model space using a domain specific language.
+3. Towards Unified Data and Life Cycle Management for deep learning:
+This paper mainly concentrates on developing of life cycle management system and huge data for deep learning. Firstly, proposes a high-level domain specific language to speed up the modeling process.
 
 ## Bibliography:
 [1] Hui Miao, Ang Li, Larry S. Davis, Amol Deshpande, "ModelHub: Deep Learning Lifecycle Management" 2017.
