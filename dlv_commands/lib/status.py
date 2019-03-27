@@ -3,6 +3,7 @@ import sys
 import json
 import global_config
 import hashlib
+import zipfile
 
 def handle_options_status(cmd_parser):
 
@@ -21,8 +22,9 @@ def write_status_to_file(status_file, current_status):
         f.write(json.dumps(current_status))
 
 def has_diff(file1, file2):
-    hash_value1 = hashlib.md5(open(file1).read()).hexdigest()
-    hash_value2 = hashlib.md5(open(file2).read()).hexdigest()
+        
+    hash_value1 = hashlib.md5(open(file1, 'r').read()).hexdigest()
+    hash_value2 = hashlib.md5(open(file2, 'r').read()).hexdigest()
 
     return hash_value1 != hash_value2
 
@@ -90,6 +92,8 @@ def status(args = {}):
 
     if args.json:
         print(json.dumps(file_status, indent=4))
+    elif (len(file_status["Untracked Files"]) == 0) and (len(file_status["Modified Files"]) == 0) and (len(file_status["Staged Files"]) == 0) :
+        print("All files in the current repository and branch: " + current_branch + " are up-to-date")
     else:
         print_status(file_status)
     

@@ -1,6 +1,7 @@
 import os
 import json
 import re
+import zipfile
 
 DLV_DIR = ".dlv"
 
@@ -137,3 +138,16 @@ def get_last_file_version(branch_path, file_name):
         version = tracked_files[file_name]
 
     return version
+
+def compress_file(file_name, dest_file_path):
+    fantasy_zip = zipfile.ZipFile(dest_file_path, 'w')
+        
+    for folder, subfolders, files in os.walk(file_name):
+             
+        for file in files:
+            fantasy_zip.write(os.path.join(folder, file),
+                                  os.path.relpath(os.path.join(folder,file), file_name),
+                                  compress_type = zipfile.ZIP_DEFLATED)
+    
+    fantasy_zip.close() 
+
