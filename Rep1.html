@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sample Bootstrap Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <a class="navbar-brand" href="home.html">Home</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Current Repository <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="Rep1.html">Repository-1</a></li>
+                    <li><a href="Rep2.html">Repository-2</a></li>
+                    <li><a href="Rep3.html">Repository-3</a></li>
+                </ul>
+            </li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Current Branch <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Master Branch</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <h2>Repository-1</h2>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#changes">Changes</a></li>
+        <li><a data-toggle="tab" href="#history">History</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="changes" class="tab-pane fade in active">
+            <h2>Changed files</h2>
+            <div class="list-group">
+                <a href="#" class="list-group-item">File-1</a>
+                <a href="#" class="list-group-item">File-2</a>
+                <a href="#" class="list-group-item">File-3</a>
+                <a href="#" class="list-group-item">File-4</a>
+                <a href="#" class="list-group-item">File-5</a>
+                <a href="#" class="list-group-item">File-6</a>
+            </div>
+            <form>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Summary (Mandatory)">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" rows="5" id="description" placeholder="Description"></textarea>
+                </div>
+                <input type="submit" class="btn btn-info" value="Commit to Master">
+            </form>
+        </div>
+        <div id="history" class="tab-pane fade">
+            <h2>History of Commits</h2>
+            <div class="list-group">
+                <a href="#" class="list-group-item">Commit 6.0</a>
+                <a href="#" class="list-group-item">Commit 5.0</a>
+                <a href="#" class="list-group-item">Commit 4.0</a>
+                <a href="#" class="list-group-item">Commit 3.0</a>
+                <a href="#" class="list-group-item">Commit 2.0</a>
+                <a href="#" class="list-group-item">Commit 1.0</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
