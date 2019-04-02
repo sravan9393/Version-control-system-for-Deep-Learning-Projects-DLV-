@@ -3,6 +3,7 @@ import os
 import sys
 import json
 import shutil
+import status
 
 def handle_options_init(cmd_parser):
   
@@ -23,6 +24,9 @@ def handle_options_init(cmd_parser):
   cmd_parser.set_defaults(func=init)
 
 
+print(1)
+print(2)
+
 def init(args):
 
     if args.repo_dir != None:
@@ -40,13 +44,7 @@ def init(args):
             sys.exit()
 
     global_config.create_dlv_dir()
-    global_config.create_branch(global_config.MASTER_BRANCH)
     global_config.set_branch(global_config.MASTER_BRANCH)
+    
 
-    # dlv config file
-    dlv_config_file = os.path.join(dlv_dir, global_config.CONFIG_FILE)  
-
-    project_model_name = os.path.basename(global_config.root_dir)
-    config_dict = { 'project_name': project_model_name }
-    with open(dlv_config_file, 'w') as f:
-        f.write(json.dumps(config_dict, indent=4))  
+    status.status()

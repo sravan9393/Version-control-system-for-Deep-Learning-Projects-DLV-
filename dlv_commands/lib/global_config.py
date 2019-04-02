@@ -3,6 +3,8 @@ import json
 import re
 import zipfile
 
+SERVER_PROJECT_DIR = "/home/sindhusha55/project_files"
+
 DLV_DIR = ".dlv"
 
 CONFIG_FILE = "config.txt"  # to store the file storage details
