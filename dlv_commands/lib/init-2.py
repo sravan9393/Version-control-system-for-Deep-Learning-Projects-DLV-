@@ -22,6 +22,8 @@ def handle_options_init(cmd_parser):
 
   cmd_parser.set_defaults(func=init)
 
+print(1)
+print(2)
 
 def init(args):
 
@@ -39,14 +41,6 @@ def init(args):
             print("{repo} exists. Use '-f' to force create or remove " + dlv_dir + " directory")
             sys.exit()
 
-    global_config.create_dlv_dir()
     global_config.create_branch(global_config.MASTER_BRANCH)
     global_config.set_branch(global_config.MASTER_BRANCH)
-
-    # dlv config file
-    dlv_config_file = os.path.join(dlv_dir, global_config.CONFIG_FILE)  
-
-    project_model_name = os.path.basename(global_config.root_dir)
-    config_dict = { 'project_name': project_model_name }
-    with open(dlv_config_file, 'w') as f:
-        f.write(json.dumps(config_dict, indent=4))  
+    

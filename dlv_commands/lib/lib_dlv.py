@@ -6,12 +6,22 @@ from add import *
 from commit import *
 from status import *
 from history import *
+from diff import *
+from push import *
+from pull import *
+from list import *
+from desc import *
 
 commands_usage = { 'init': 'Used for intializing DLV repository',
                    'add': 'Used for adding files to staging area',
                    'commit': 'tracking the files in the local repository',
                    'status': 'Gives the status of the files',
-                   'history': 'Gives the history of previous commits'}
+                   'history': 'Gives the history of previous commits',
+                   'diff': 'Compare changes in two models',
+                   'push': 'Store the versions in server',
+                   'pull': 'Get the local copy of the model',
+                   'list': 'Get the list of all projects',
+                   'desc': 'Get the description of each project'}
 
 def main():
     parser = argparse.ArgumentParser()

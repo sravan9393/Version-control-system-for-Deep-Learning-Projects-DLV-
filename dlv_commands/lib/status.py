@@ -3,6 +3,7 @@ import sys
 import json
 import global_config
 import hashlib
+import zipfile
 
 def handle_options_status(cmd_parser):
 
@@ -21,10 +22,35 @@ def write_status_to_file(status_file, current_status):
         f.write(json.dumps(current_status))
 
 def has_diff(file1, file2):
-    hash_value1 = hashlib.md5(open(file1).read()).hexdigest()
-    hash_value2 = hashlib.md5(open(file2).read()).hexdigest()
+        
+    hash_value1 = hashlib.md5(open(file1, 'r').read()).hexdigest()
+    hash_value2 = hashlib.md5(open(file2, 'r').read()).hexdigest()
 
     return hash_value1 != hash_value2
+
+def get_push_status(current_branch):
+
+    dlv_dir = os.path.join(global_config.root_dir, global_config.DLV_DIR)
+
+    config_dict = {}
+    with open(os.path.join(dlv_dir, global_config.CONFIG_FILE), 'r') as f:
+        config_dict = json.load(f)
+
+    local_branch_path = os.path.join(dlv_dir, current_branch)
+    if 'username' not in config_dict:
+        return "Not pushed to server\n" + \
+               "local is ahead of server by " + str(global_config.commit_counter(local_branch_path) - 1) + " commits"
+
+    project_server_dir = os.path.join(global_config.SERVER_PROJECT_DIR, config_dict['username'], config_dict['project_name'])
+
+    server_branch_path = os.path.join(project_server_dir, global_config.DLV_DIR, current_branch)
+
+    diff_of_commits = abs(global_config.commit_counter(server_branch_path) - global_config.commit_counter(local_branch_path))
+    if diff_of_commits == 0:
+        return "Updated"
+    else:
+        return "local is ahead of server by " + str(diff_of_commits) + " commits"
+    
 
 def get_status(orig_file):
 
@@ -54,6 +80,8 @@ def get_status(orig_file):
 
 def print_status(file_status):
     for status in file_status.keys():
+        if status == "Tracked Files":
+            continue
         print(status)
         for f in file_status[status]:
             print("\t" + f)
@@ -90,6 +118,14 @@ def status(args = {}):
 
     if args.json:
         print(json.dumps(file_status, indent=4))
+    elif (len(file_status["Untracked Files"]) == 0) and (len(file_status["Modified Files"]) == 0) and (len(file_status["Staged Files"]) == 0) :
+        print("All files in the current repository and branch: " + current_branch + " are up-to-date")
     else:
         print_status(file_status)
     
+    # status about server and local
+    server_status = get_push_status(current_branch)
+    if server_status == "Updated":
+        print("Server is up-to-date with all the commits")
+    else:
+        print(server_status) 
