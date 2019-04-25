@@ -1,0 +1,26 @@
+<mat-toolbar color="dark" align="center">
+  <mat-toolbar-row>
+    <!-- Logo -->
+    <span>
+      <img src="http://www.devacron.com/wp-content/uploads/2016/06/git_logo.png" width="30px" height="30px"/>
+    </span>
+
+    <!-- Upload -->
+    <span>
+      <button mat-flat-button color="primary"mdbBtn type="button" class="waves-light" mdbWavesEffect (click)="openUploadDialog()">Upload</button>
+    </span>
+
+    <!-- Search -->
+
+    <!-- Logout -->
+    <span class="example-spacer">
+          <button mat-flat-button color="primary"mdbBtn type="button" class="waves-light" mdbWavesEffect> Logout</button>
+    </span>
+
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<br>
+<br>
+
+<app-user-repos></app-user-repos>
