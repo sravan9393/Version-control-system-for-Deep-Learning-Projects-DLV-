@@ -1,0 +1,22 @@
+.image{
+  height:45em; background-size:cover; width:100%;
+  background-image:url('https://img.freepik.com/free-vector/old-vintage-colors-grit-texture-vector-background_87538-180.jpg?size=626&ext=jpg');
+  background-position:50% 50%;
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+}
+
+div {
+  display: block;
+}
+
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  height: 100%;
+  padding: 20px;
+}

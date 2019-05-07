@@ -1,0 +1,4 @@
+#!/usr/bin/env python2
+
+import lib_dlv
+lib_dlv.main()

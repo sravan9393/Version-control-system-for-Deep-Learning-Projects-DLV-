@@ -1,0 +1,67 @@
+<!-- Header -->
+<mat-toolbar color="dark" align="center">
+  <mat-toolbar-row>
+    <!-- Logo -->
+    <span>
+      <a href="/home"><img src="http://www.devacron.com/wp-content/uploads/2016/06/git_logo.png" width="30px" height="30px"/></a>
+    </span>
+
+    <!-- Upload -->
+    <span>
+      <button mat-flat-button color="primary" mdbBtn type="button" class="waves-light" mdbWavesEffect (click)="openUploadDialog()">Upload</button>
+    </span>
+
+    <!-- Search -->
+
+    <!-- Logout -->
+    <span class="example-spacer">
+          <button mat-flat-button color="primary" mdbBtn type="button" class="waves-light" mdbWavesEffect routerLink="/login">LogOut</button>
+    </span>
+
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<br>
+<br>
+
+<!-- Repository -->
+<mat-card style="background-color: whitesmoke">
+  <mat-card-header style="background-color:whitesmoke">
+    <mat-card-title>{{item.key}}</mat-card-title>
+    <mat-card-subtitle *ngIf="item.description">{{item.description}}</mat-card-subtitle>
+    <mat-card-subtitle *ngIf="!item.description">No description</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+
+    <!-- Repository Details-->
+    <mat-tab-group>
+      <mat-tab label="Code"> <br>Most Recent Version Files <br><br>
+        <app-repo-code [changed]="changed"></app-repo-code>
+      </mat-tab>
+
+
+
+      <mat-tab label="Changes">
+        <br>
+        Modified Files
+        <br>
+        <br>
+            <app-repo-changes [repository]="repository" [changed]="changed"></app-repo-changes>
+        <form class="example-form" [formGroup]="commitFormGroup">
+          <mat-form-field class="example-full-width">
+            <textarea matInput placeholder="Enter Commit Message" name="message" formControlName="message" class="form-control is-invalid"></textarea>
+          </mat-form-field>
+        </form>
+        <div class="example-button-row">
+          <button mat-raised-button color="primary" (click)="doCommit()">Commit Changes</button>
+        </div>
+      </mat-tab>
+
+
+
+      <mat-tab label="History"> <br>Complete Version History<br>
+        <app-repo-history></app-repo-history>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>

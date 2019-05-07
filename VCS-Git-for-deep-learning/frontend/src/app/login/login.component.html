@@ -1,0 +1,37 @@
+
+<!--The content below is only a placeholder and can be replaced.-->
+<mat-toolbar color="dark">
+  <mat-toolbar-row>
+    <!--  <span>HOME</span> -->
+    <span><img src="http://www.devacron.com/wp-content/uploads/2016/06/git_logo.png" width="30px" height="30px"/></span>
+    <span class="spacer"></span>
+    <a mat-button routerLink="/register" color="primary">Register</a>
+    <a mat-button routerLink="/login" color="primary">Login</a>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<br>
+<br>
+
+<mat-toolbar>
+  <span>LOGIN</span>
+</mat-toolbar>
+<mat-card>
+<mat-card-content>
+    <p *ngIf="invalidCredentials" style="color:red">Invalid user Credentials</p>
+    <form [formGroup]="userLoginForm" class="my-form">
+      <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <input  matInput  placeholder="Email" name="email" formControlName="email" class="form-control is-invalid ">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Password</mat-label>
+        <input  matInput  placeholder="Password" type="password" formControlName="password" class="form-control is-invalid ">
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="login()" color="primary">LOGIN</button>
+  </mat-card-actions>
+</mat-card>
+

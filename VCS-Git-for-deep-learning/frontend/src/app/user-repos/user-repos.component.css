@@ -1,0 +1,12 @@
+.example-card {
+  max-width: 800px;
+  max-height: 300px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.example-header-image {
+  background-size: cover;
+}
