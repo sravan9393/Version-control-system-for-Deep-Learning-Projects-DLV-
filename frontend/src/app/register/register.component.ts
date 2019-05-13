@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
+import {LocalStorageService} from "../local-storage.service";
 
 @Component({
   selector: 'app-register',
@@ -7,9 +10,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  userRegisterForm: FormGroup;
+  submittedForm = false;
+
+  constructor( private localStorage: LocalStorageService, private fb: FormBuilder, private router: Router) {}
+
 
   ngOnInit() {
+    this.userRegisterForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      address: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      dob: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  }
+
+  get f() { return this.userRegisterForm.controls; }
+
+  register(): void {
+
+    this.submittedForm = true;
+    if ( this.userRegisterForm.dirty && this.userRegisterForm.valid ) {
+      this.localStorage.StoreRegisterDetailsInLocalStorage(this.userRegisterForm);
+
+      this.router.navigate(['/login']);
+    }
   }
 
 }
+
+

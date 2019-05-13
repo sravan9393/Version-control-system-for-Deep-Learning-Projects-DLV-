@@ -18,7 +18,12 @@ def handle_options_init(cmd_parser):
   cmd_parser.add_argument('-r', '--repo',
                           action="store",
                           dest="repo_dir",
-                          help="create repository and initialize")  
+                          help="create repository and initialize")
+
+  cmd_parser.add_argument('-d', '--dir',
+                          action="store",
+                          dest="root_dir",
+                          help="Initialize Repository")
 
   cmd_parser.set_defaults(func=init)
 
@@ -27,6 +32,9 @@ def init(args):
 
     if args.repo_dir != None:
         global_config.create_repository(args.repo_dir)
+
+    if args.root_dir != None:
+        global_config.root_dir = args.root_dir
 
     dlv_dir = os.path.join(global_config.root_dir, global_config.DLV_DIR)
 

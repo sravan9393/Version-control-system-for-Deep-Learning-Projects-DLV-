@@ -24,17 +24,33 @@ def handle_options_commit(cmd_parser):
                           dest='message',
                           help='Enter commit description')
 
+    cmd_parser.add_argument('-d', '--dir',
+                          action="store",
+                          dest="root_dir",
+                          help="Initialize Repository")
+
+
     cmd_parser.set_defaults(func=commit)
 
 def copy_to_cached_dir(orig_file, cache_file, branch_path):
 
     if orig_file.startswith(".\\"): # only modify the text if it starts with the prefix
         orig_file = orig_file.replace(".\\", "", 1) # remove one instance of prefix
+    
+    if orig_file.startswith("\\"): # only modify the text if it starts with the prefix
+        orig_file = orig_file.replace("\\", "", 1)
+
+    if cache_file.startswith(".\\"): # only modify the text if it starts with the prefix
+        cache_file = cache_file.replace(".\\", "", 1) # remove one instance of prefix
+    
+    if cache_file.startswith("\\"): # only modify the text if it starts with the prefix
+        cache_file = cache_file.replace("\\", "", 1)
         
+    act_file = os.path.join(global_config.root_dir,orig_file)
     commit_file = os.path.join(branch_path, global_config.CACHE_DIR, cache_file)
 
     try:
-        shutil.copy2(orig_file, commit_file)
+        shutil.copy2(act_file, commit_file)
 
     except IOError as e:
         if e.errno != errno.ENOENT:
@@ -44,7 +60,7 @@ def copy_to_cached_dir(orig_file, cache_file, branch_path):
             os.makedirs(os.path.dirname(commit_file))
         except: pass
 
-        shutil.copy2(orig_file, commit_file)
+        shutil.copy2(act_file, commit_file)
 
 def clear_staged_file(branch_path):
 
@@ -95,6 +111,9 @@ def update_commit_log(branch_path, commit_file, commit_log_dict):
         
 
 def commit(args):
+
+    if args.root_dir != None:
+        global_config.root_dir = args.root_dir
      
     if not global_config.check_dlv_exists():
         print("No dlv repository exists")
@@ -113,13 +132,19 @@ def commit(args):
     stage_dir = os.path.join(branch_path, global_config.STAGE_DIR)
 
     changed_files = []
-    for folder, subfolders, files in os.walk( os.curdir ):
+    root_folder = ""
+    for folder, subfolders, files in os.walk( global_config.root_dir ):
 
-        if global_config.DLV_DIR in folder:
+        if global_config.DLV_DIR in folder or global_config.GIT_DIR in folder:
             continue
 
+        root_folder = folder.split(global_config.root_dir)[1]
+        
         for f in files:
-            orig_file = os.path.join(folder, f)
+            orig_file = os.path.join(root_folder, f)
+            if orig_file.startswith("\\"): # only modify the text if it starts with the prefix
+                orig_file = orig_file.replace("\\", "", 1)
+
             file_version = global_config.get_last_file_version(branch_path, orig_file)
 
             if file_version == 0:
@@ -129,23 +154,25 @@ def commit(args):
             else:    
                 last_commit_file = os.path.join(branch_path, global_config.CACHE_DIR, orig_file + "." + str(file_version))
 
-                if os.path.exists(last_commit_file) and status.has_diff(orig_file, last_commit_file):
+                full_file_path = os.path.join(global_config.root_dir, orig_file)
+                if os.path.exists(last_commit_file) and status.has_diff(full_file_path, last_commit_file):
                     file_version += 1
                     copy_to_cached_dir(orig_file, orig_file + "." + str(file_version), branch_path)
                     changed_files.append(orig_file)
 
             commit_files_versions[orig_file] = file_version
+        
 
     # Write the commit file
     commit_version = global_config.commit_counter(branch_path)
 
     if len(changed_files) != 0:
         # Write Commit log file
-	commit_log_dict = { 'message': args.message[0], 'author': args.author[0], 'changed_files': changed_files }
+        commit_log_dict = { 'message': args.message[0], 'author': args.author[0], 'changed_files': changed_files }
         update_commit_log(branch_path, "commit." + str(commit_version), commit_log_dict)
 
         create_commit_file(branch_path, commit_version, commit_files_versions)
-	print("Committed to branch name: " + current_branch + " with version: " + str(commit_version))
+        print("Committed to branch name: " + current_branch + " with version: " + str(commit_version))
     else:
         print("All staged files already tracked")
 

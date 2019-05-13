@@ -11,6 +11,11 @@ def handle_options_history(cmd_parser):
                           help="version",
                           action="store_true")
 
+    cmd_parser.add_argument('-d', '--dir',
+                          action="store",
+                          dest="root_dir",
+                          help="Staus of the repository")
+
     cmd_parser.set_defaults(func=history)
 
 def print_commit_log_file(branch_path):
@@ -26,6 +31,9 @@ def print_commit_log_file(branch_path):
     print(json.dumps(commit_files, indent=4))
 
 def history(args):
+
+    if args.root_dir != None:
+        global_config.root_dir = args.root_dir
     
     if not global_config.check_dlv_exists():
         print("No dlv repository exists")

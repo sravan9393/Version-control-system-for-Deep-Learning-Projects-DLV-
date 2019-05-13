@@ -69,10 +69,10 @@ def printTable(list_dict):
     for k,v in list_dict.iteritems():
 
         print(k + " => " + v['description'])
-        print "{:<25} {:<4} {:<15} {:<15} {:<20}".format('file', 'version', 'author', 'message', 'date')
+        print("{:<25} {:<4} {:<15} {:<15} {:<20}".format('file', 'version', 'author', 'message', 'date'))
 
         for key,val in v['files'].iteritems():
-            print "{:<25} {:<4} {:<15} {:<15} {:<20}".format(key, val['version'], val['author'], val['message'], val['date'])
+            print("{:<25} {:<4} {:<15} {:<15} {:<20}".format(key, val['version'], val['author'], val['message'], val['date']))
     
         print("\n\n")
 

@@ -3,9 +3,10 @@ import json
 import re
 import zipfile
 
-SERVER_PROJECT_DIR = "/home/sindhusha55/project_files"
+SERVER_PROJECT_DIR = r"E:\ASE_database"
 
 DLV_DIR = ".dlv"
+GIT_DIR = ".git"
 
 CONFIG_FILE = "config.txt"  # to store the file storage details
 HEAD_FILE = "HEAD.txt"   # to point to the current branch address

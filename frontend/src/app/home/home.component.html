@@ -7,14 +7,14 @@
 
     <!-- Upload -->
     <span>
-      <button mat-flat-button color="primary"mdbBtn type="button" class="waves-light" mdbWavesEffect (click)="openUploadDialog()">Upload</button>
+      <button mat-flat-button color="primary" mdbBtn type="button" class="waves-light" mdbWavesEffect (click)="openUploadDialog()">Upload</button>
     </span>
 
     <!-- Search -->
 
     <!-- Logout -->
     <span class="example-spacer">
-          <button mat-flat-button color="primary"mdbBtn type="button" class="waves-light" mdbWavesEffect> Logout</button>
+          <button mat-flat-button color="primary" mdbBtn type="button" class="waves-light" mdbWavesEffect routerLink="/login">LogOut</button>
     </span>
 
   </mat-toolbar-row>
@@ -23,4 +23,4 @@
 <br>
 <br>
 
-<app-user-repos></app-user-repos>
+<app-user-repos [reposList]="reposList"></app-user-repos>

@@ -38,11 +38,11 @@ def add(args):
 
     if not global_config.check_dlv_exists():
         print("No dlv repository exists")
-        sys.exit()
+        sys.exit(0)
 
     if args.dir_path == None:
         print("Please enter the directory path")
-	sys.exit(0)
+        sys.exit(0)
 
     current_branch = global_config.get_current_branch()
     branch_path = os.path.join(global_config.root_dir, global_config.DLV_DIR, current_branch)

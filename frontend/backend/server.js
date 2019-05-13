@@ -1,21 +1,23 @@
-const express = require('express');
-const upload = require('./upload');
-const cors = require('cors');
-// const listImages = require('./listImages');
+const express = require('express'),
+  path = require('path'),
+  bodyParser = require('body-parser'),
+  cors = require('cors'),
+  mongoose = require('mongoose'),
+  config = require('./MongoDB');
 
-const server = express();
+const customerRoute = require('./routes/user.route');
+mongoose.Promise = global.Promise;
+mongoose.connect(config.DB, { useNewUrlParser: true }).then(
+  () => {console.log('Database is connected') },
+  err => { console.log('Can not connect to the database'+ err)}
+);
 
-var corsOptions = {
-  origin: '*',
-  optionsSuccessStatus: 200
-};
+const app = express();
+app.use(bodyParser.json());
+app.use(cors());
+app.use('/user', customerRoute);
+const port = process.env.PORT || 4000;
 
-server.use(cors(corsOptions));
-
-server.post('/upload', upload);
-// server.post('/getImages', listImages);
-// server.get('/getImages1', listImages);
-
-server.listen(3000, () => {
-  console.log('Server started!');
+const server = app.listen(port, function(){
+  console.log('Listening on port ' + port);
 });

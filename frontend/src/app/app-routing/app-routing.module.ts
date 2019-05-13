@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import {HomeComponent} from '../home/home.component';
 import {LoginComponent} from '../login/login.component';
 import {RegisterComponent} from '../register/register.component';
+import {RepositoryViewComponent} from '../repository-view/repository-view.component';
 
 const routes: Routes = [
   {
@@ -12,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: HomeComponent
+    component: LoginComponent
   },
   {
     path: 'login',
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'repositoryView',
+    component: RepositoryViewComponent
   }
 ];
 

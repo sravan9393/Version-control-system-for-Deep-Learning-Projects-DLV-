@@ -22,11 +22,14 @@ def get_project_description(project_path):
     
     config_file = os.path.join(project_path, global_config.DLV_DIR, global_config.CONFIG_FILE)
     config_dict = {}
+    
     with open(config_file, 'r') as f:
         config_dict = json.load(f)
 
-    return config_dict['description']
+    if 'description' in config_dict.keys():
+        return config_dict['description']
 
+    return ""
 
 def get_history_of_files(project_path):
 
@@ -43,6 +46,8 @@ def get_history_of_files(project_path):
 
     # open last commit file and get list of files and versions
     last_commit_file = global_config.get_last_commit_version_file(project_branch_path)
+
+
     
     with open(last_commit_file, 'r') as f:
         last_commit_dict = json.load(f)
@@ -58,13 +63,13 @@ def get_history_of_files(project_path):
 
 def printTable(list_dict):
 
-    for k,v in list_dict.iteritems():
+    for k,v in list_dict.items():
 
         print(k + " => " + v['description'])
-        print "{:<25} {:<4} {:<15} {:<15} {:<20}".format('file', 'version', 'author', 'message', 'date')
+        print("{:<25} {:<4} {:<15} {:<15} {:<20}".format('file', 'version', 'author', 'message', 'date'))
 
-        for key,val in v['files'].iteritems():
-            print "{:<25} {:<4} {:<15} {:<15} {:<20}".format(key, val['version'], val['author'], val['message'], val['date'])
+        for key,val in v['files'].items():
+            print("{:<25} {:<4} {:<15} {:<15} {:<20}".format(key, val['version'], val['author'], val['message'], val['date']))
     
         print("\n\n")
 
@@ -95,4 +100,4 @@ def list(args = {}):
          # For each project get the history ( file, version, author, message, date )
          list_dict[folder]['files'] = get_history_of_files(project_path)
 
-    printTable(list_dict)
+    print(json.dumps(list_dict))
