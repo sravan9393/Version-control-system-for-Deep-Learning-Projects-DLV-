@@ -20,5 +20,5 @@ https://github.com/sindhusha-t/VCS-Git-for-deep-learning/wiki/Project-Increment-
 ### FINAL REPORT:
 https://github.com/sindhusha-t/VCS-Git-for-deep-learning/blob/master/ASE-Project%20DLV%20Final%20Report.pdf
 
-Video: https://www.youtube.com/watch?v=p0Z6mslp40o
-PPT: https://drive.google.com/open?id=15k_qQV8vwhH7z8nJcK1RgbNCV03Ee_KC
+**Video:** https://www.youtube.com/watch?v=p0Z6mslp40o   
+**PPT:** https://drive.google.com/open?id=15k_qQV8vwhH7z8nJcK1RgbNCV03Ee_KC
